@@ -18,7 +18,7 @@ export function CurrentUser(): JSX.Element {
 
     return (
         <Container size="lg">
-            <Breadcrumb
+            {/* <Breadcrumb
                 items={[{
                     title: intl.formatMessage({
                         id: 'STAKING_BREADCRUMB_ROOT',
@@ -29,18 +29,18 @@ export function CurrentUser(): JSX.Element {
                         id: 'STAKING_BREADCRUMB_MY_STAKE',
                     }),
                 }]}
-            />
+            /> */}
 
             <WalletConnector
                 message={intl.formatMessage({
                     id: 'STAKING_CONNECT_WALLET_MSG',
                 })}
             >
-                <StakingPerformance />
+                {/* <StakingPerformance /> */}
 
                 <StakingBalance />
 
-                <Observer>
+                {/* <Observer>
                     {() => (
                         tonWallet.address ? (
                             <UserStats
@@ -49,9 +49,9 @@ export function CurrentUser(): JSX.Element {
                             />
                         ) : null
                     )}
-                </Observer>
+                </Observer> */}
 
-                <StakingRounds />
+                {/* <StakingRounds /> */}
 
                 <Observer>
                     {() => (

@@ -88,75 +88,75 @@ export function StakingBalance(): JSX.Element {
                     title={intl.formatMessage({
                         id: 'STAKING_BALANCE_REDEEM',
                     })}
-                    desc={(
-                        <Tabs>
-                            <Tab
-                                active={activeTab === 'claim'}
-                                onClick={changeTabFn('claim')}
-                            >
-                                {intl.formatMessage({
-                                    id: 'STAKING_BALANCE_CLAIM',
+                    // desc={(
+                    //     <Tabs>
+                    //         <Tab
+                    //             active={activeTab === 'claim'}
+                    //             onClick={changeTabFn('claim')}
+                    //         >
+                    //             {intl.formatMessage({
+                    //                 id: 'STAKING_BALANCE_CLAIM',
+                    //             })}
+                    //         </Tab>
+                    //         <Tab
+                    //             active={activeTab === 'redeem'}
+                    //             onClick={changeTabFn('redeem')}
+                    //         >
+                    //             {intl.formatMessage({
+                    //                 id: 'STAKING_BALANCE_REDEEM',
+                    //             })}
+                    //         </Tab>
+                    //     </Tabs>
+                    // )}
+                >
+                    {/* {activeTab === 'redeem' && ( */}
+                    <Observer>
+                        {() => (
+                            <FormLayout
+                                loading={redeemForm.isLoading}
+                                disabled={!redeemForm.isValid || redeemForm.isLoading}
+                                onSubmit={redeemForm.submit}
+                                hint={intl.formatMessage({
+                                    id: 'STAKING_BALANCE_STAKE_BALANCE',
+                                }, {
+                                    /* eslint-disable no-nested-ternary */
+                                    amount: accountData.hasAccount === undefined
+                                        ? ''
+                                        : !accountData.hasAccount
+                                            ? '0'
+                                            : formattedAmount(
+                                                redeemForm.balance,
+                                                accountData.tokenDecimals,
+                                                { target: 'token' },
+                                            ),
+                                    symbol: accountData.hasAccount === undefined
+                                        ? ''
+                                        : accountData.tokenSymbol,
                                 })}
-                            </Tab>
-                            <Tab
-                                active={activeTab === 'redeem'}
-                                onClick={changeTabFn('redeem')}
-                            >
-                                {intl.formatMessage({
+                                action={intl.formatMessage({
                                     id: 'STAKING_BALANCE_REDEEM',
                                 })}
-                            </Tab>
-                        </Tabs>
-                    )}
-                >
-                    {activeTab === 'redeem' && (
-                        <Observer>
-                            {() => (
-                                <FormLayout
-                                    loading={redeemForm.isLoading}
-                                    disabled={!redeemForm.isValid || redeemForm.isLoading}
-                                    onSubmit={redeemForm.submit}
-                                    hint={intl.formatMessage({
-                                        id: 'STAKING_BALANCE_STAKE_BALANCE',
-                                    }, {
-                                        /* eslint-disable no-nested-ternary */
-                                        amount: accountData.hasAccount === undefined
-                                            ? ''
-                                            : !accountData.hasAccount
-                                                ? '0'
-                                                : formattedAmount(
-                                                    redeemForm.balance,
-                                                    accountData.tokenDecimals,
-                                                    { target: 'token' },
-                                                ),
-                                        symbol: accountData.hasAccount === undefined
-                                            ? ''
-                                            : accountData.tokenSymbol,
+                            >
+                                <AmountField
+                                    isValid={!redeemForm.isLoading && new BigNumber(redeemForm.amount).gt(0)
+                                        ? redeemForm.isValid
+                                        : true}
+                                    value={redeemForm.amount}
+                                    decimals={accountData.tokenDecimals}
+                                    maxValue={redeemForm.balance}
+                                    disabled={redeemForm.isLoading}
+                                    onChange={redeemForm.setAmount}
+                                    onClickMax={redeemForm.setAmountShifted}
+                                    placeholder={intl.formatMessage({
+                                        id: 'STAKING_BALANCE_AMOUNT',
                                     })}
-                                    action={intl.formatMessage({
-                                        id: 'STAKING_BALANCE_REDEEM',
-                                    })}
-                                >
-                                    <AmountField
-                                        isValid={!redeemForm.isLoading && new BigNumber(redeemForm.amount).gt(0)
-                                            ? redeemForm.isValid
-                                            : true}
-                                        value={redeemForm.amount}
-                                        decimals={accountData.tokenDecimals}
-                                        maxValue={redeemForm.balance}
-                                        disabled={redeemForm.isLoading}
-                                        onChange={redeemForm.setAmount}
-                                        onClickMax={redeemForm.setAmountShifted}
-                                        placeholder={intl.formatMessage({
-                                            id: 'STAKING_BALANCE_AMOUNT',
-                                        })}
-                                    />
-                                </FormLayout>
-                            )}
-                        </Observer>
-                    )}
+                                />
+                            </FormLayout>
+                        )}
+                    </Observer>
+                    {/* )} */}
 
-                    {activeTab === 'claim' && (
+                    {/* {activeTab === 'claim' && (
                         <Observer>
                             {() => (
                                 <FormLayout
@@ -198,7 +198,7 @@ export function StakingBalance(): JSX.Element {
                                 </FormLayout>
                             )}
                         </Observer>
-                    )}
+                    )} */}
                 </CardLayout>
             </div>
         </Section>

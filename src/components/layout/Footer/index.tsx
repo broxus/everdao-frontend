@@ -46,7 +46,7 @@ export function Footer(): JSX.Element {
                         {toolbar}
                     </div>
                     <nav className="footer-nav">
-                        <div className="footer-nav__col">
+                        {/* <div className="footer-nav__col">
                             <div className="footer-nav__col-title">
                                 {intl.formatMessage({
                                     id: 'FOOTER_NAV_HEADER_BRIDGE',
@@ -75,7 +75,7 @@ export function Footer(): JSX.Element {
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div className="footer-nav__col">
                             <div className="footer-nav__col-title">
                                 {intl.formatMessage({
@@ -90,16 +90,16 @@ export function Footer(): JSX.Element {
                                         })}
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link to="/staking">
                                         {intl.formatMessage({
                                             id: 'FOOTER_NAV_STAKING_EXPLORER_LINK_TEXT',
                                         })}
                                     </Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
-                        <div className="footer-nav__col">
+                        {/* <div className="footer-nav__col">
                             <div className="footer-nav__col-title">
                                 {intl.formatMessage({
                                     id: 'FOOTER_NAV_HEADER_GUIDES',
@@ -128,7 +128,7 @@ export function Footer(): JSX.Element {
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div className="footer-nav__col">
                             <div className="footer-nav__col-title">
                                 {intl.formatMessage({
@@ -150,7 +150,7 @@ export function Footer(): JSX.Element {
                                         })}
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link to="/staking">
                                         {intl.formatMessage({
                                             id: 'FOOTER_NAV_LEADERBOARD_LINK_TEXT',
@@ -163,10 +163,10 @@ export function Footer(): JSX.Element {
                                             id: 'FOOTER_NAV_BRIDGE_DISTRIBUTION_LINK_TEXT',
                                         })}
                                     </a>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
-                        <div className="footer-nav__col">
+                        {/* <div className="footer-nav__col">
                             <div className="footer-nav__col-title">
                                 {intl.formatMessage({
                                     id: 'FOOTER_NAV_HEADER_DEFI_PRODUCTS',
@@ -206,7 +206,7 @@ export function Footer(): JSX.Element {
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                     </nav>
                     <div className="footer__right">
                         {toolbar}

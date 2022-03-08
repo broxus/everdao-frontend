@@ -6,7 +6,7 @@ import { Table } from '@/components/common/Table'
 import { Pagination } from '@/components/common/Pagination'
 import { Header, Section, Title } from '@/components/common/Section'
 import { UserCard } from '@/components/common/UserCard'
-import { Button } from '@/components/common/Button'
+// import { Button } from '@/components/common/Button'
 import { useStakeholders } from '@/modules/Governance/hooks'
 import { StakeholdersOrdering } from '@/modules/Governance/types'
 import { usePagination, useTableOrder } from '@/hooks'
@@ -50,14 +50,14 @@ export function TopVotersInner(): JSX.Element {
                     })}
                 </Title>
 
-                <Button
+                {/* <Button
                     type="tertiary"
                     link="/staking"
                 >
                     {intl.formatMessage({
                         id: 'TOP_VOTERS_LINK',
                     })}
-                </Button>
+                </Button> */}
             </Header>
 
             <div className="card card--flat card--small">

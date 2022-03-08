@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 
 import { Container } from '@/components/common/Section'
 import { Breadcrumb } from '@/components/common/Breadcrumb'
-import { UserStats } from '@/modules/Staking/components/UserStats'
+// import { UserStats } from '@/modules/Staking/components/UserStats'
 import { Transactions } from '@/modules/Staking/components/Transactions'
 import { useScrollTop } from '@/hooks/useScrollTop'
 import { sliceAddress } from '@/utils'
@@ -23,11 +23,11 @@ export function User({
         <Container size="lg">
             <Breadcrumb
                 items={[{
-                    title: intl.formatMessage({
-                        id: 'STAKING_BREADCRUMB_ROOT',
-                    }),
-                    link: '/staking',
-                }, {
+                //     title: intl.formatMessage({
+                //         id: 'STAKING_BREADCRUMB_ROOT',
+                //     }),
+                //     link: '/staking',
+                // }, {
                     title: intl.formatMessage({
                         id: 'STAKING_BREADCRUMB_USER',
                     }, {
@@ -36,9 +36,9 @@ export function User({
                 }]}
             />
 
-            <UserStats
+            {/* <UserStats
                 userAddress={userAddress}
-            />
+            /> */}
 
             <Transactions
                 userAddress={userAddress}

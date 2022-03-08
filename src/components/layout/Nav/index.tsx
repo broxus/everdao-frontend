@@ -17,7 +17,7 @@ export function Nav(): JSX.Element {
     return (
         <nav className="main-nav">
             <ul>
-                <li>
+                {/* <li>
                     <NavLink
                         to="/bridge"
                         isActive={() => ['bridge', 'transfers', 'transfer'].includes(splitLocation[1])}
@@ -59,17 +59,17 @@ export function Nav(): JSX.Element {
                             </Observer>
                         </ul>
                     </div>
-                </li>
+                </li> */}
                 <li>
-                    <NavLink to="/staking">
+                    <NavLink to="/staking/my">
                         {intl.formatMessage({
                             id: 'NAV_LINK_TEXT_STAKING',
                         })}
 
-                        <Icon icon="arrowDown" className="main-nav__arrow" />
+                        {/* <Icon icon="arrowDown" className="main-nav__arrow" /> */}
                     </NavLink>
 
-                    <div className="main-nav__sub">
+                    {/* <div className="main-nav__sub">
                         <ul>
                             <li>
                                 <NavLink to="/staking/my">
@@ -86,7 +86,7 @@ export function Nav(): JSX.Element {
                                 </NavLink>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </li>
                 <li>
                     <NavLink
@@ -125,13 +125,13 @@ export function Nav(): JSX.Element {
                         </ul>
                     </div>
                 </li>
-                <li>
+                {/* <li>
                     <NavLink to="/relayers/create">
                         {intl.formatMessage({
                             id: 'NAV_LINK_TEXT_RELAYERS',
                         })}
                     </NavLink>
-                </li>
+                </li> */}
                 {/*
                 <li>
                     <NavLink to="/airdrop">

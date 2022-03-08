@@ -15,14 +15,14 @@ import { Header } from '@/components/layout/Header'
 import messages from '@/lang/en'
 import { EvmWallet, TonWallet } from '@/modules/Accounts'
 // import Airdrop from '@/pages/airdrop'
-import Bridge from '@/pages/bridge'
-import TransferStatus from '@/pages/transfer'
-import TransferList from '@/pages/transfer/list'
+// import Bridge from '@/pages/bridge'
+// import TransferStatus from '@/pages/transfer'
+// import TransferList from '@/pages/transfer/list'
 import StakingSelf from '@/pages/staking/my'
 import StakingUser from '@/pages/staking/explorer/user'
-import StakingExplorer from '@/pages/staking/explorer'
-import RelayersStatus from '@/pages/relayers/create'
-import RelayersKeys from '@/pages/relayers/create/keys'
+// import StakingExplorer from '@/pages/staking/explorer'
+// import RelayersStatus from '@/pages/relayers/create'
+// import RelayersKeys from '@/pages/relayers/create/keys'
 import Overview from '@/pages/governance'
 import Proposals from '@/pages/governance/proposals'
 import Proposal from '@/pages/governance/proposals/item'
@@ -54,6 +54,9 @@ export function App(): JSX.Element {
                     <div className="main">
                         <Switch>
                             <Route exact path="/">
+                                <Redirect exact to="/governance" />
+                            </Route>
+                            {/* <Route exact path="/">
                                 <Redirect exact to="/bridge" />
                             </Route>
                             <Route exact path="/transfers">
@@ -70,27 +73,27 @@ export function App(): JSX.Element {
                             </Route>
                             <Route path="/bridge">
                                 <Bridge />
-                            </Route>
+                            </Route> */}
                             {/*
                             <Route exact path="/airdrop">
                                 <Airdrop />
                             </Route>
                             */}
-                            <Route exact path="/staking">
+                            {/* <Route exact path="/staking">
                                 <StakingExplorer />
-                            </Route>
+                            </Route> */}
                             <Route exact path="/staking/explorer/:userAddress(0:[A-Fa-f0-9]{64})">
                                 <StakingUser />
                             </Route>
                             <Route exact path="/staking/my">
                                 <StakingSelf />
                             </Route>
-                            <Route exact path="/relayers/create">
+                            {/* <Route exact path="/relayers/create">
                                 <RelayersStatus />
                             </Route>
                             <Route exact path="/relayers/create/keys">
                                 <RelayersKeys />
-                            </Route>
+                            </Route> */}
                             <Route exact path="/governance">
                                 <Overview />
                             </Route>
@@ -113,7 +116,7 @@ export function App(): JSX.Element {
                             {(evmWallet.hasProvider || tonWallet.hasProvider) && (
                                 <NativeScrollArea className="wallets-scroll-area">
                                     <div className="wallets">
-                                        <EvmWallet />
+                                        {/* <EvmWallet /> */}
                                         <TonWallet />
                                     </div>
                                 </NativeScrollArea>
