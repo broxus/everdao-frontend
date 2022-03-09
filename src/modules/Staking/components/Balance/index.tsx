@@ -58,7 +58,8 @@ export function StakingBalance(): JSX.Element {
                                             { target: 'token' },
                                         )
                                         : '0',
-                                    symbol: accountData.tokenSymbol,
+                                    symbol: 'WEVER',
+                                    // symbol: accountData.tokenSymbol,
                                 })}
                                 action={intl.formatMessage({
                                     id: 'STAKING_BALANCE_STAKE',
@@ -129,9 +130,10 @@ export function StakingBalance(): JSX.Element {
                                                 accountData.tokenDecimals,
                                                 { target: 'token' },
                                             ),
-                                    symbol: accountData.hasAccount === undefined
-                                        ? ''
-                                        : accountData.tokenSymbol,
+                                    symbol: 'WEVER',
+                                    // symbol: accountData.hasAccount === undefined
+                                    //     ? ''
+                                    //     : accountData.tokenSymbol,
                                 })}
                                 action={intl.formatMessage({
                                     id: 'STAKING_BALANCE_REDEEM',

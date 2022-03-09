@@ -98,14 +98,14 @@ export function TransactionsInner({
                             id: 'STAKING_TRANSACTIONS_WITHDRAWALS',
                         })}
                     </Tab>
-                    <Tab
+                    {/* <Tab
                         active={transactionKind === 'claim'}
                         onClick={changeKindFn('claim')}
                     >
                         {intl.formatMessage({
                             id: 'STAKING_TRANSACTIONS_REWARDS',
                         })}
-                    </Tab>
+                    </Tab> */}
                     <Tab
                         active={transactionKind === 'freeze'}
                         onClick={changeKindFn('freeze')}

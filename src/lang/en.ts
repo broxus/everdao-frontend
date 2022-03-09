@@ -459,7 +459,7 @@ export default {
     STAKING_TRANSACTIONS_FREEZES: 'Freezes',
     STAKING_TRANSACTIONS_COL_TYPE: 'Type',
     STAKING_TRANSACTIONS_COL_TRS: 'Transaction',
-    STAKING_TRANSACTIONS_COL_AMOUNT: 'Amount, BRIDGE',
+    STAKING_TRANSACTIONS_COL_AMOUNT: 'Amount, WEVER',
     STAKING_TRANSACTIONS_COL_DATE: 'Date',
     STAKING_TRANSACTIONS_CLAIM: 'Claim',
     STAKING_TRANSACTIONS_DEPOSIT: 'Deposit',
@@ -575,7 +575,8 @@ export default {
     PROPOSAL_CANCEL_POPUP_CONFIRM: 'Cancel proposal',
 
     USER_VOTES_TITLE: 'My votes',
-    USER_VOTES_DESC: 'Your voting power and weight are defined by the amount of BRIDGE tokens staked in the governance interface.',
+    // USER_VOTES_DESC: 'Your voting power and weight are defined by the amount of BRIDGE tokens staked in the governance interface.',
+    USER_VOTES_DESC: 'Your voting power and weight are defined by the amount of WEVER tokens staked in the governance interface.',
     USER_VOTES_POWER: 'Voting power',
     USER_VOTES_WEIGHT: 'Voting weight',
     USER_VOTES_RANK: 'Rank',
@@ -583,13 +584,15 @@ export default {
 
     VOTING_PANEL_TOTAL: 'of {total}',
     VOTING_PANEL_VOTER: 'Voter',
-    VOTING_PANEL_VOTE: 'Vote, BRIDGE',
+    // VOTING_PANEL_VOTE: 'Vote, BRIDGE',
+    VOTING_PANEL_VOTE: 'Vote, WEVER',
     VOTING_PANEL_VIEW_ALL: 'View all voters',
 
     PROPOSAL_VOTING_TITLE: 'Voting',
 
     USER_VOTE_TITLE: 'Your vote',
-    USER_VOTE_VOTING_POWER: 'Voting power, BRIDGE',
+    // USER_VOTE_VOTING_POWER: 'Voting power, BRIDGE',
+    USER_VOTE_VOTING_POWER: 'Voting power, WEVER',
     USER_VOTE_VOTING_WEIGHT: 'Vote weight',
     USER_VOTE_FOR: 'Vote for',
     USER_VOTE_AGAINST: 'Vote against',
@@ -699,8 +702,10 @@ export default {
     ACTION_POPUP_VALUE: 'Value',
 
     PROPOSAL_FORM_WARNING_TITLE: 'Insufficient stake',
-    PROPOSAL_FORM_LOCKED_TEXT: 'You have {locked} locked tokens in stake. Please increase your stake to at least {amount} BRIDGE tokens.',
-    PROPOSAL_FORM_WARNING_TEXT: 'Your current stake is not big enough to create a proposal. Please increase your stake to at least {amount} BRIDGE tokens.',
+    // PROPOSAL_FORM_LOCKED_TEXT: 'You have {locked} locked tokens in stake. Please increase your stake to at least {amount} BRIDGE tokens.',
+    PROPOSAL_FORM_LOCKED_TEXT: 'You have {locked} locked tokens in stake. Please increase your stake to at least {amount} WEVER tokens.',
+    // PROPOSAL_FORM_WARNING_TEXT: 'Your current stake is not big enough to create a proposal. Please increase your stake to at least {amount} BRIDGE tokens.',
+    PROPOSAL_FORM_WARNING_TEXT: 'Your current stake is not big enough to create a proposal. Please increase your stake to at least {amount} WEVER tokens.',
     PROPOSAL_FORM_LINK: 'Increase stake',
 
     PROPOSAL_INFO_TITLE: 'Info',
@@ -722,7 +727,8 @@ export default {
     GOVERNANCE_DAO_OVERVIEW: 'DAO overview',
     GOVERNANCE_RECENT_PROPOSALS: 'Recent proposals',
 
-    DAO_STATS_RESERVES: 'BRIDGE reserves',
+    // DAO_STATS_RESERVES: 'BRIDGE reserves',
+    DAO_STATS_RESERVES: 'WEVER reserves',
     DAO_STATS_DELEGATED: 'Delegated votes',
     DAO_STATS_VOTING_ADDRESSES: 'Voting addresses',
     DAO_STATS_PROPOSALS: 'Proposals',
