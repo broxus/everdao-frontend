@@ -18,9 +18,9 @@ export function ActionFormTon({
 }: Props): JSX.Element {
     const intl = useIntl()
     const [localAction, setAction] = React.useState<Record<keyof TonAction, string>>({
-        target: action?.target || '',
-        payload: action?.payload || '',
-        value: action?.value || '',
+        target: action?.target || '0:be3c91096d9f0ba0ef67e178ddca85b50baf6ab8a571c397712c96a5a6f4ccb7',
+        payload: action?.payload || 'te6ccgEBAgEAEQABCAMFmxgBABBBY2NlcHRlZA==',
+        value: action?.value || '1',
     })
 
     const targetIsValid = isTonAddressValid(localAction.target)
