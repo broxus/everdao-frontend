@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { observer } from 'mobx-react-lite'
 import { DiscussionEmbed } from 'disqus-react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { ContentLoader } from '@/components/common/ContentLoader'
 import { Container } from '@/components/common/Section'
@@ -15,6 +15,7 @@ import { ProposalTimeline } from '@/modules/Governance/components/ProposalTimeli
 import { ProposalManagement } from '@/modules/Governance/components/ProposalManagement'
 import { UserVote } from '@/modules/Governance/components/UserVote'
 import { useProposalContext } from '@/modules/Governance/providers'
+import { Share } from '@/components/common/Share'
 
 import './index.scss'
 
@@ -26,6 +27,8 @@ export function ProposalInner(): JSX.Element | null {
     const intl = useIntl()
     const proposal = useProposalContext()
     const routeParams = useParams<RouteParams>()
+    const location = useLocation()
+    const url = `https://everdao.net${location.pathname}`
 
     if (proposal.loading) {
         return (
@@ -69,6 +72,7 @@ export function ProposalInner(): JSX.Element | null {
                 <div className="proposal-layout-sidebar">
                     <ProposalManagement />
                     <UserVote />
+                    <Share />
                 </div>
             </div>
 
@@ -77,7 +81,7 @@ export function ProposalInner(): JSX.Element | null {
             <DiscussionEmbed
                 shortname="everdao"
                 config={{
-                    url: window.location.href,
+                    url,
                     identifier: routeParams.id,
                     title: proposal.title,
                 }}

@@ -1,0 +1,17 @@
+@import '@/styles/_mix';
+
+.share {
+    display: flex;
+    column-gap: 24px;
+    padding: 24px;
+
+    .react-share__ShareButton {
+        @include btn-reset;
+        color: rgba(255, 255, 255, 0.56);
+        transition: color 0.25s ease;
+
+        &:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+}

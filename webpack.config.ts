@@ -129,6 +129,11 @@ export default (_: any, options: any): WebpackConfig => {
                         context: 'public',
                         from: 'favicon.svg',
                     },
+                    {
+                        context: 'public',
+                        from: 'meta-image.jpg',
+                        to: 'assets/meta-image.jpg'
+                    },
                 ],
             }),
         )
