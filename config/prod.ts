@@ -93,9 +93,9 @@ export const HiddenBridgeStrategyFactory = new AddressLiteral('0:18e1dfffa7c1312
 
 export const RelayEvmNetworkChainId = '1'
 
-export const StakingAccountAddress = new AddressLiteral('0:ec6a2fd6c3732e494684d016f1addec1a1828b6b7ecfcd30b34e8e5ad2d421d0')
+export const StakingAccountAddress = new AddressLiteral('0:c4b6a1d72db79ea6fa4f71114440bb2d77d878cbb6e8bc181f51ede9cde50d06')
 
-export const DaoRootContractAddress = new AddressLiteral('0:6da8defd136c0227dfa24edde79728142d2bfb74bc9edf66ad86ae7cd8e56a86')
+export const DaoRootContractAddress = new AddressLiteral('0:cd809fb1cde24b6d3cd4a3dd9102e10c0f73ddfa21c7118f233dc7309bbb0b73')
 
 export const TokenAssetsURI = 'https://raw.githubusercontent.com/broxus/bridge-assets/master/main.json'
 
@@ -105,8 +105,8 @@ export const UpgradeTokenListURI = 'https://raw.githubusercontent.com/broxus/eve
 
 export const Web3Url = 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
 
-export const IndexerApiBaseUrl = 'https://bridge-indexer.broxus.com/v1'
+export const IndexerApiBaseUrl = 'https://everdao-stacking.broxus.com/v1'
 
-export const DaoIndexerApiBaseUrl = 'https://bridge-dao-indexer.broxus.com/v1'
+export const DaoIndexerApiBaseUrl = 'https://everdao-dao.broxus.com/v1'
 
 export const TonSwapIndexerApiBaseUrl = 'https://ton-swap-indexer.broxus.com/v1'
