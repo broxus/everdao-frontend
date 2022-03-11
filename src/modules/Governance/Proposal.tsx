@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { observer } from 'mobx-react-lite'
+import { DiscussionEmbed } from 'disqus-react'
+import { useParams } from 'react-router-dom'
 
 import { ContentLoader } from '@/components/common/ContentLoader'
 import { Container } from '@/components/common/Section'
@@ -16,9 +18,14 @@ import { useProposalContext } from '@/modules/Governance/providers'
 
 import './index.scss'
 
+type RouteParams = {
+    id: string;
+}
+
 export function ProposalInner(): JSX.Element | null {
     const intl = useIntl()
     const proposal = useProposalContext()
+    const routeParams = useParams<RouteParams>()
 
     if (proposal.loading) {
         return (
@@ -66,6 +73,15 @@ export function ProposalInner(): JSX.Element | null {
             </div>
 
             <VotesTable />
+
+            <DiscussionEmbed
+                shortname="everdao"
+                config={{
+                    url: window.location.href,
+                    identifier: routeParams.id,
+                    title: proposal.title,
+                }}
+            />
         </Container>
     )
 }
