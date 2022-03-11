@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { useProposal } from '@/modules/Governance/hooks'
 import { ProposalStore } from '@/modules/Governance/stores'
+import { useUserData } from '@/modules/Governance/hooks/useUserData'
 
 export const ProposalContext = React.createContext<ProposalStore | undefined>(undefined)
 
@@ -29,15 +30,16 @@ export function ProposalStoreProvider({
 }: Props): JSX.Element {
     const routeParams = useParams<RouteParams>()
     const proposalId = parseInt(routeParams.id, 10)
-    const proposal = useProposal(proposalId)
+    const userData = useUserData()
+    const proposal = useProposal(userData)
 
     React.useEffect(() => {
-        proposal.init()
+        proposal.init(proposalId)
 
         return () => {
             proposal.dispose()
         }
-    }, [])
+    }, [proposalId])
 
     return (
         <ProposalContext.Provider value={proposal}>

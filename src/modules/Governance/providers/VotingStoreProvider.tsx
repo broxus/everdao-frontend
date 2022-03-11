@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { useVoting } from '@/modules/Governance/hooks'
+import { useUserData } from '@/modules/Governance/hooks/useUserData'
 import { VotingStore } from '@/modules/Governance/stores'
 
 export const VotingContext = React.createContext<VotingStore | undefined>(undefined)
@@ -22,7 +23,8 @@ type Props = {
 export function VotingStoreProvider({
     children,
 }: Props): JSX.Element | null {
-    const voting = useVoting()
+    const userData = useUserData()
+    const voting = useVoting(userData)
 
     React.useEffect(() => {
         voting.init()

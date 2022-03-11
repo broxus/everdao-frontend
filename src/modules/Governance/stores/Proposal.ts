@@ -30,8 +30,9 @@ export class ProposalStore {
 
     public readonly allVotes = new VotesStore()
 
+    protected proposalId?: number
+
     constructor(
-        protected proposalId: number,
         protected tonWallet: TonWalletService,
         protected userData: UserDataStore,
     ) {
@@ -39,7 +40,8 @@ export class ProposalStore {
         this.handleProposals = lastOfCalls(handleProposals)
     }
 
-    public init(): void {
+    public init(proposalId: number): void {
+        this.proposalId = proposalId
         this.userData.init()
         this.fetch()
     }
