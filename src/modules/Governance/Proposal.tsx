@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { observer } from 'mobx-react-lite'
 import { DiscussionEmbed } from 'disqus-react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { ContentLoader } from '@/components/common/ContentLoader'
 import { Container } from '@/components/common/Section'
@@ -19,16 +19,10 @@ import { Share } from '@/components/common/Share'
 
 import './index.scss'
 
-type RouteParams = {
-    id: string;
-}
-
 export function ProposalInner(): JSX.Element | null {
     const intl = useIntl()
     const proposal = useProposalContext()
-    const routeParams = useParams<RouteParams>()
     const location = useLocation()
-    const proposalId = parseInt(routeParams.id, 10)
 
     if (proposal.loading) {
         return (
@@ -78,13 +72,13 @@ export function ProposalInner(): JSX.Element | null {
 
             <VotesTable />
 
-            {proposalId && (
+            {proposal.id && (
                 <DiscussionEmbed
                     shortname="everdao"
                     config={{
                         url: `https://everdao.net${location.pathname}`,
                         // For wrong urls in proposals whose id is less than 4
-                        identifier: proposalId < 4 ? proposalId.toString() : `proposal-${proposalId}`,
+                        identifier: proposal.id < 4 ? proposal.id.toString() : `proposal-${proposal.id}`,
                         title: proposal.title,
                     }}
                 />
