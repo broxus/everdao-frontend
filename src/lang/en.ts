@@ -227,7 +227,6 @@ export default {
     STAKING_ACCOUNT_FORM_WALLET_BALANCE: 'Wallet balance:',
     STAKING_ACCOUNT_FORM_AVAILABLE_BALANCE: 'Available balance:',
     STAKING_ACCOUNT_FORM_STATS_FEE: 'Gas fee',
-    STAKING_ACCOUNT_FORM_HINT: 'If the staking contract uses a smaller amount than fee, it will return the change to your wallet.',
     STAKING_ACCOUNT_FORM_SUBMIT: 'Submit',
     STAKING_ACCOUNT_FORM_CONNECT: 'Connect wallet',
 

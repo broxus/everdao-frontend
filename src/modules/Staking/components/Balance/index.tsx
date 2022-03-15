@@ -95,38 +95,46 @@ export function StakingBalance(): JSX.Element {
                     </Observer>
                 </CardLayout>
 
-                <CardLayout
-                    theme="red"
-                    title={intl.formatMessage({
-                        id: 'STAKING_BALANCE_REDEEM',
-                    })}
-                    // desc={(
-                    //     <Tabs>
-                    //         <Tab
-                    //             active={activeTab === 'claim'}
-                    //             onClick={changeTabFn('claim')}
-                    //         >
-                    //             {intl.formatMessage({
-                    //                 id: 'STAKING_BALANCE_CLAIM',
-                    //             })}
-                    //         </Tab>
-                    //         <Tab
-                    //             active={activeTab === 'redeem'}
-                    //             onClick={changeTabFn('redeem')}
-                    //         >
-                    //             {intl.formatMessage({
-                    //                 id: 'STAKING_BALANCE_REDEEM',
-                    //             })}
-                    //         </Tab>
-                    //     </Tabs>
-                    // )}
-                >
-                    {/* {activeTab === 'redeem' && ( */}
-                    <Observer>
-                        {() => (
+                <Observer>
+                    {() => (
+                        <CardLayout
+                            theme="red"
+                            title={intl.formatMessage({
+                                id: 'STAKING_BALANCE_REDEEM',
+                            })}
+                            desc={redeemForm.hasCastedVotes === true
+                                ? intl.formatMessage({
+                                    id: 'USER_VOTE_UNLOCK_HINT',
+                                })
+                                : undefined}
+                            // desc={(
+                            //     <Tabs>
+                            //         <Tab
+                            //             active={activeTab === 'claim'}
+                            //             onClick={changeTabFn('claim')}
+                            //         >
+                            //             {intl.formatMessage({
+                            //                 id: 'STAKING_BALANCE_CLAIM',
+                            //             })}
+                            //         </Tab>
+                            //         <Tab
+                            //             active={activeTab === 'redeem'}
+                            //             onClick={changeTabFn('redeem')}
+                            //         >
+                            //             {intl.formatMessage({
+                            //                 id: 'STAKING_BALANCE_REDEEM',
+                            //             })}
+                            //         </Tab>
+                            //     </Tabs>
+                            // )}
+                        >
+                            {/* {activeTab === 'redeem' && ( */}
                             <FormLayout
                                 loading={redeemForm.isLoading}
-                                disabled={!redeemForm.amountValid || !redeemForm.gasValid || redeemForm.isLoading}
+                                disabled={!redeemForm.amountValid
+                                    || !redeemForm.gasValid
+                                    || redeemForm.hasCastedVotes !== false
+                                    || redeemForm.isLoading}
                                 onSubmit={redeemForm.submit}
                                 hint={intl.formatMessage({
                                     id: 'STAKING_BALANCE_STAKE_BALANCE',
@@ -167,7 +175,7 @@ export function StakingBalance(): JSX.Element {
                                     value={redeemForm.amount}
                                     decimals={accountData.tokenDecimals}
                                     maxValue={redeemForm.balance}
-                                    disabled={redeemForm.isLoading}
+                                    disabled={redeemForm.isLoading || redeemForm.hasCastedVotes !== false}
                                     onChange={redeemForm.setAmount}
                                     onClickMax={redeemForm.setAmountShifted}
                                     placeholder={intl.formatMessage({
@@ -175,54 +183,54 @@ export function StakingBalance(): JSX.Element {
                                     })}
                                 />
                             </FormLayout>
-                        )}
-                    </Observer>
-                    {/* )} */}
+                            {/* )} */}
 
-                    {/* {activeTab === 'claim' && (
-                        <Observer>
-                            {() => (
-                                <FormLayout
-                                    loading={claimForm.isLoading}
-                                    disabled={!claimForm.isValid || claimForm.isLoading}
-                                    onSubmit={claimForm.submit}
-                                    hint={intl.formatMessage({
-                                        id: 'STAKING_BALANCE_CLAIM_DISABLED',
-                                    })}
-                                    // hint={accountData.lockedReward && accountData.tokenDecimals
-                                    //     && new BigNumber(accountData.lockedReward).gt(0)
-                                    //     ? intl.formatMessage({
-                                    //         id: 'STAKING_BALANCE_LOCKED_REWARD',
-                                    //     }, {
-                                    //         amount: formattedAmount(
-                                    //             accountData.lockedReward,
-                                    //             accountData.tokenDecimals,
-                                    //             { target: 'token' },
-                                    //         ),
-                                    //         symbol: accountData.tokenSymbol,
-                                    //     })
-                                    //     : undefined}
-                                    action={intl.formatMessage({
-                                        id: 'STAKING_BALANCE_CLAIM',
-                                    })}
-                                >
-                                    <AmountField
-                                        readOnly
-                                        value={claimForm.balance && accountData.tokenDecimals
-                                            ? formattedAmount(
-                                                claimForm.balance,
-                                                accountData.tokenDecimals,
-                                                { preserve: true },
-                                            )
-                                            : ''}
-                                        disabled={claimForm.isLoading}
-                                        displayMaxButton={false}
-                                    />
-                                </FormLayout>
-                            )}
-                        </Observer>
-                    )} */}
-                </CardLayout>
+                            {/* {activeTab === 'claim' && (
+                                <Observer>
+                                    {() => (
+                                        <FormLayout
+                                            loading={claimForm.isLoading}
+                                            disabled={!claimForm.isValid || claimForm.isLoading}
+                                            onSubmit={claimForm.submit}
+                                            hint={intl.formatMessage({
+                                                id: 'STAKING_BALANCE_CLAIM_DISABLED',
+                                            })}
+                                            // hint={accountData.lockedReward && accountData.tokenDecimals
+                                            //     && new BigNumber(accountData.lockedReward).gt(0)
+                                            //     ? intl.formatMessage({
+                                            //         id: 'STAKING_BALANCE_LOCKED_REWARD',
+                                            //     }, {
+                                            //         amount: formattedAmount(
+                                            //             accountData.lockedReward,
+                                            //             accountData.tokenDecimals,
+                                            //             { target: 'token' },
+                                            //         ),
+                                            //         symbol: accountData.tokenSymbol,
+                                            //     })
+                                            //     : undefined}
+                                            action={intl.formatMessage({
+                                                id: 'STAKING_BALANCE_CLAIM',
+                                            })}
+                                        >
+                                            <AmountField
+                                                readOnly
+                                                value={claimForm.balance && accountData.tokenDecimals
+                                                    ? formattedAmount(
+                                                        claimForm.balance,
+                                                        accountData.tokenDecimals,
+                                                        { preserve: true },
+                                                    )
+                                                    : ''}
+                                                disabled={claimForm.isLoading}
+                                                displayMaxButton={false}
+                                            />
+                                        </FormLayout>
+                                    )}
+                                </Observer>
+                            )} */}
+                        </CardLayout>
+                    )}
+                </Observer>
             </div>
         </Section>
     )
