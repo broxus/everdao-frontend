@@ -28,7 +28,7 @@ export function ProposalInner(): JSX.Element | null {
     const proposal = useProposalContext()
     const routeParams = useParams<RouteParams>()
     const location = useLocation()
-    const url = `https://everdao.net${location.pathname}`
+    const proposalId = parseInt(routeParams.id, 10)
 
     if (proposal.loading) {
         return (
@@ -78,14 +78,17 @@ export function ProposalInner(): JSX.Element | null {
 
             <VotesTable />
 
-            <DiscussionEmbed
-                shortname="everdao"
-                config={{
-                    url,
-                    identifier: routeParams.id,
-                    title: proposal.title,
-                }}
-            />
+            {proposalId && (
+                <DiscussionEmbed
+                    shortname="everdao"
+                    config={{
+                        url: `https://everdao.net${location.pathname}`,
+                        // For wrong urls in proposals whose id is less than 4
+                        identifier: proposalId < 4 ? proposalId.toString() : `proposal-${proposalId}`,
+                        title: proposal.title,
+                    }}
+                />
+            )}
         </Container>
     )
 }
