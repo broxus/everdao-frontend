@@ -216,7 +216,7 @@ export function Footer(): JSX.Element {
                     <ul className="footer-soc">
                         <li>
                             <a
-                                href="https://t.me/tonbridge_official"
+                                href="https://t.me/ever_dao"
                                 target="_blank"
                                 rel="nofollow noopener noreferrer"
                                 title="Telegram"
