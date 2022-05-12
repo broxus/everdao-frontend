@@ -10,12 +10,42 @@ stages:
   - cloudbuild
   - deploy
 
+cloudbuild:image:dev:
+  only:
+    - dev
+  except:
+    - tags
+  extends: .cloudbuild:common
+  before_script:
+    - rm -rf src/config.ts && cp config/dev.ts src/config.ts
+
+deploy:dev:
+  only:
+    - dev
+  except:
+    - tags
+  extends: .deploy
+  when: on_success
+  environment:
+    name: dev
+
+stop:dev:
+  only:
+    - dev
+  except:
+    - tags
+  extends: .stop
+  environment:
+    name: dev
+
 cloudbuild:image:master:
   only:
     - master
   except:
     - tags
   extends: .cloudbuild:common
+  before_script:
+    - rm -rf src/config.ts && cp config/stage.ts src/config.ts
 
 deploy:master:
   only:
@@ -34,3 +64,30 @@ stop:master:
   extends: .stop
   environment:
     name: stage
+
+cloudbuild:image:prod:
+  only:
+    - prod
+  except:
+    - tags
+  extends: .cloudbuild:common
+  before_script:
+    - rm -rf src/config.ts && cp config/prod.ts src/config.ts
+
+deploy:prod:
+  only:
+    - prod
+  except:
+    - tags
+  extends: .deploy
+  environment:
+    name: prod
+
+stop:prod:
+  only:
+    - prod
+  except:
+    - tags
+  extends: .stop
+  environment:
+    name: prod
