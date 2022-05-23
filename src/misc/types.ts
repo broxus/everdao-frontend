@@ -22,4 +22,6 @@ export type ProposalConfig = DecodedAbiFunctionOutputs<typeof ProposalAbi.Root, 
 
 export type CastedVotes = DecodedAbiFunctionOutputs<typeof UserDataAbi.Root, 'casted_votes'>['casted_votes']
 
+export type CreatedProposals = DecodedAbiFunctionOutputs<typeof UserDataAbi.Root, 'created_proposals'>['created_proposals']
+
 export type CreateProposalData = DecodedAbiFunctionInputs<typeof DaoAbi.Root, 'propose'>

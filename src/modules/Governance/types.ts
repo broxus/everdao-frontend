@@ -1,7 +1,7 @@
 import { Address } from 'everscale-inpage-provider'
 
 import {
-    CastedVotes, ProposalConfig, StackingDetails,
+    CastedVotes, CreatedProposals, ProposalConfig, StackingDetails,
 } from '@/misc'
 
 export enum ActionNetwork {
@@ -206,6 +206,7 @@ export type UserProposalsStoreState = {
 
 export type ProposalStoreData = {
     response?: ProposalsResponse;
+    userVote?: Vote;
 }
 
 export type ProposalStoreState = {
@@ -247,6 +248,7 @@ export type UserDataStoreData = {
     tokenBalance?: string;
     lockedTokens?: string;
     castedVotes?: CastedVotes;
+    createdProposals?: CreatedProposals;
     stakingDetails?: StackingDetails;
     stakeholder?: Stakeholder;
     votesCount?: number;

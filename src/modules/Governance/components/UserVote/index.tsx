@@ -23,6 +23,7 @@ export function UserVoteInner(): JSX.Element {
     const [formVisible, setFormVisible] = React.useState(false)
     const [support, setSupport] = React.useState(false)
     const castedVote = voting.castedVotes?.find(([id]) => parseInt(id, 10) === proposal.id)
+    const createdProposal = voting.createdProposals?.find(([id]) => parseInt(id, 10) === proposal.id)
 
     const showFormFn = (_support: boolean) => () => {
         setSupport(_support)
@@ -59,6 +60,18 @@ export function UserVoteInner(): JSX.Element {
         }
     }
 
+    const unlockVoteTokens = async () => {
+        if (!proposal.id) {
+            return
+        }
+        try {
+            await voting.unlockVoteTokens(proposal.id)
+        }
+        catch (e) {
+            error(e)
+        }
+    }
+
     return (
         <div className="user-vote">
             <h3 className="user-vote__title">
@@ -66,10 +79,10 @@ export function UserVoteInner(): JSX.Element {
                     id: 'USER_VOTE_TITLE',
                 })}
 
-                {castedVote && (
-                    <Badge status={castedVote[1] ? 'success' : 'fail'}>
+                {(castedVote || proposal.userVote) && (
+                    <Badge status={(castedVote?.[1] || proposal.userVote?.support) ? 'success' : 'fail'}>
                         {intl.formatMessage({
-                            id: castedVote[1] ? 'PROPOSALS_VOTE_1' : 'PROPOSALS_VOTE_0',
+                            id: (castedVote?.[1] || proposal.userVote?.support) ? 'PROPOSALS_VOTE_1' : 'PROPOSALS_VOTE_0',
                         })}
                     </Badge>
                 )}
@@ -131,6 +144,7 @@ export function UserVoteInner(): JSX.Element {
                                         })
                                     )}
                                 </Button>
+
                                 <div className="user-vote__hint">
                                     {intl.formatMessage({
                                         id: 'USER_VOTE_UNLOCK_HINT',
@@ -181,8 +195,26 @@ export function UserVoteInner(): JSX.Element {
                                     </div>
                                 )
                             ) : (
-                                proposal.startTime && proposal.queuedAt && (
-                                    <ProposalDates />
+                                proposal.state === 'Failed' && createdProposal ? (
+                                    <Button
+                                        block
+                                        size="md"
+                                        type="secondary"
+                                        disabled={voting.unlockLoading}
+                                        onClick={unlockVoteTokens}
+                                    >
+                                        {voting.unlockLoading ? (
+                                            <ContentLoader slim transparent />
+                                        ) : (
+                                            intl.formatMessage({
+                                                id: 'USER_VOTE_UNLOCK_TOKENS',
+                                            })
+                                        )}
+                                    </Button>
+                                ) : (
+                                    proposal.startTime && proposal.queuedAt && (
+                                        <ProposalDates />
+                                    )
                                 )
                             )
                         )

@@ -1,12 +1,15 @@
-import { makeAutoObservable, toJS } from 'mobx'
+import {
+    IReactionDisposer, makeAutoObservable, reaction, runInAction, toJS,
+} from 'mobx'
 import { Address } from 'everscale-inpage-provider'
 
 import {
-    Description, EthAction, Proposal, ProposalsRequest,
-    ProposalsResponse, ProposalState, ProposalStoreData,
-    ProposalStoreState, TonAction,
+    Description, EthAction, Proposal, ProposalsResponse,
+    ProposalState, ProposalStoreData, ProposalStoreState, TonAction, Vote,
 } from '@/modules/Governance/types'
-import { handleProposals, parseDescription } from '@/modules/Governance/utils'
+import {
+    handleProposals, handleUserProposals, handleVotes, parseDescription,
+} from '@/modules/Governance/utils'
 import { UserDataStore } from '@/modules/Governance/stores/UserData'
 import { VotesStore } from '@/modules/Governance/stores/Votes'
 import { TonWalletService } from '@/stores/TonWalletService'
@@ -22,7 +25,13 @@ export class ProposalStore {
 
     protected _state: ProposalStoreState = {}
 
-    protected handleProposals: (params: ProposalsRequest) => Promise<ProposalsResponse | undefined>
+    protected fetchDisposer?: IReactionDisposer
+
+    protected handleProposals = lastOfCalls(handleProposals)
+
+    protected handleUserProposals = lastOfCalls(handleUserProposals)
+
+    protected handleVotes = lastOfCalls(handleVotes)
 
     public readonly forVotesPreview = new VotesStore()
 
@@ -37,19 +46,34 @@ export class ProposalStore {
         protected userData: UserDataStore,
     ) {
         makeAutoObservable(this)
-        this.handleProposals = lastOfCalls(handleProposals)
     }
 
     public init(proposalId: number): void {
         this.proposalId = proposalId
-        this.userData.init()
-        this.fetch()
+
+        if (!this.fetchDisposer) {
+            this.fetchDisposer = reaction(
+                () => !this.tonWallet.isInitializing && !this.tonWallet.isConnecting,
+                isReady => {
+                    if (isReady) {
+                        this.userData.init()
+                        this.fetch()
+                        this.syncUserVote()
+                    }
+                },
+                {
+                    fireImmediately: true,
+                },
+            )
+        }
     }
 
     public dispose(): void {
         this.userData.dispose()
         this.data = {}
         this._state = {}
+        this.fetchDisposer?.()
+        this.fetchDisposer = undefined
     }
 
     public async fetch(): Promise<void> {
@@ -91,6 +115,36 @@ export class ProposalStore {
 
             if (response) {
                 this.setResponse(response)
+            }
+        }
+        catch (e) {
+            error(e)
+        }
+    }
+
+    protected async syncUserVote(): Promise<void> {
+        try {
+            if (this.proposalId && this.tonWallet.address) {
+                const response = await this.handleVotes({
+                    limit: 10,
+                    offset: 0,
+                    proposalId: this.proposalId,
+                    voter: this.tonWallet.address,
+                    ordering: {
+                        column: 'createdAt',
+                        direction: 'DESC',
+                    },
+                })
+                if (response) {
+                    runInAction(() => {
+                        [this.data.userVote] = response.votes
+                    })
+                }
+            }
+            else {
+                runInAction(() => {
+                    this.data.userVote = undefined
+                })
             }
         }
         catch (e) {
@@ -439,6 +493,10 @@ export class ProposalStore {
         }
 
         return this.proposal.executionTime * 1000
+    }
+
+    public get userVote(): Vote | undefined {
+        return this.data.userVote
     }
 
 }

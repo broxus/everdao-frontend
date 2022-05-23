@@ -13,15 +13,10 @@ export class UserProposalsStore {
 
     protected state: UserProposalsStoreState = {}
 
-    protected handleUserProposals: (
-        address: string,
-        params: ProposalsRequest,
-    ) => Promise<UserProposalsResponse | undefined>
+    protected handleUserProposals = lastOfCalls(handleUserProposals)
 
     constructor() {
         makeAutoObservable(this)
-
-        this.handleUserProposals = lastOfCalls(handleUserProposals)
     }
 
     public dispose(): void {

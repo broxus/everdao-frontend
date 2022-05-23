@@ -42,8 +42,10 @@ export function UnlockFormInner({
 
     const initializing = voting.castedVotes === undefined
         || userProposals.totalCount === undefined
+
     const hasCastedVotes = voting.castedVotes !== undefined
         && voting.castedVotes.length > 0
+
     const isAvailableUnlockAll = hasCastedVotes
         && voting.castedVotes.length === userProposals.totalCount
 
@@ -105,6 +107,7 @@ export function UnlockFormInner({
 
     return (
         <Popup
+            scrollable
             className="unlock-form"
             disabled={voting.unlockLoading}
             onDismiss={onDismiss}

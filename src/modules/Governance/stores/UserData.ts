@@ -4,7 +4,7 @@ import {
 } from 'mobx'
 
 import {
-    BridgeConstants, CastedVotes, StackingAbi, UserDataAbi,
+    BridgeConstants, CastedVotes, CreatedProposals, StackingAbi, UserDataAbi,
 } from '@/misc'
 import { UserDataStoreData, UserDataStoreState } from '@/modules/Governance/types'
 import { handleProposalsCount, handleStakeholder } from '@/modules/Governance/utils'
@@ -91,6 +91,7 @@ export class UserDataStore {
                 { value0: userDetails },
                 { value0: lockedTokens },
                 { casted_votes: castedVotes },
+                { created_proposals: createdProposals },
             ] = await Promise.all([
                 userDataContract.methods.getDetails({
                     answerId: 0,
@@ -99,8 +100,10 @@ export class UserDataStore {
                     answerId: 0,
                 }).call(),
                 userDataContract.methods.casted_votes({}).call(),
+                userDataContract.methods.created_proposals({}).call(),
             ])
 
+            this.setData('createdProposals', createdProposals)
             this.setData('castedVotes', castedVotes)
             this.setData('lockedTokens', lockedTokens)
             this.setData('tokenBalance', userDetails.token_balance)
@@ -193,6 +196,10 @@ export class UserDataStore {
 
     public get castedVotes(): CastedVotes | undefined {
         return toJS(this.data.castedVotes)
+    }
+
+    public get createdProposals(): CreatedProposals | undefined {
+        return toJS(this.data.createdProposals)
     }
 
     public get tokenBalance(): string | undefined {
