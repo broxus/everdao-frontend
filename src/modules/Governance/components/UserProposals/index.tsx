@@ -79,8 +79,9 @@ export function UserProposalsInner(): JSX.Element | null {
         filters.endTimeLe,
         filters.startTimeGe,
         filters.startTimeLe,
-        pagination.page,
         tonWallet.address,
+        pagination.page,
+        pagination.limit,
     ])
 
     return (
