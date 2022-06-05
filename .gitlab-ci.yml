@@ -1,5 +1,3 @@
-q
-
 include:
   - project: "infrastructure/gitlab-ci"
     ref: main
