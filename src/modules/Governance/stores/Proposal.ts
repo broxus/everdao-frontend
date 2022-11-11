@@ -18,6 +18,7 @@ import {
     error, lastOfCalls, throwException, validateUrl,
 } from '@/utils'
 import rpc from '@/hooks/useRpcClient'
+import { AutoResyncStore } from '@/modules/Governance/stores/AutoResync'
 
 export class ProposalStore {
 
@@ -26,6 +27,10 @@ export class ProposalStore {
     protected _state: ProposalStoreState = {}
 
     protected fetchDisposer?: IReactionDisposer
+
+    protected resyncDisposer?: IReactionDisposer
+
+    public readonly autoResync = new AutoResyncStore()
 
     protected handleProposals = lastOfCalls(handleProposals)
 
@@ -50,6 +55,7 @@ export class ProposalStore {
 
     public init(proposalId: number): void {
         this.proposalId = proposalId
+        this.autoResync.start()
 
         if (!this.fetchDisposer) {
             this.fetchDisposer = reaction(
@@ -66,6 +72,17 @@ export class ProposalStore {
                 },
             )
         }
+
+        if (!this.resyncDisposer) {
+            this.resyncDisposer = reaction(
+                () => this.autoResync.counter,
+                () => {
+                    this.syncProposal()
+                    this.syncVotes(true)
+                    this.allVotes.sync(true)
+                },
+            )
+        }
     }
 
     public dispose(): void {
@@ -74,6 +91,8 @@ export class ProposalStore {
         this._state = {}
         this.fetchDisposer?.()
         this.fetchDisposer = undefined
+        this.resyncDisposer?.()
+        this.resyncDisposer = undefined
     }
 
     public async fetch(): Promise<void> {
@@ -152,7 +171,7 @@ export class ProposalStore {
         }
     }
 
-    protected async syncVotes(): Promise<void> {
+    protected async syncVotes(silence?: boolean): Promise<void> {
         try {
             await Promise.all([
                 this.forVotesPreview.fetch({
@@ -164,7 +183,7 @@ export class ProposalStore {
                         column: 'createdAt',
                         direction: 'DESC',
                     },
-                }),
+                }, silence),
                 this.againstVotesPreview.fetch({
                     limit: 3,
                     offset: 0,
@@ -174,7 +193,7 @@ export class ProposalStore {
                         column: 'createdAt',
                         direction: 'DESC',
                     },
-                }),
+                }, silence),
             ])
         }
         catch (e) {

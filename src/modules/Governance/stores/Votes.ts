@@ -33,8 +33,10 @@ export class VotesStore {
         this.data[key] = value
     }
 
-    public async fetch(params: VotesRequest): Promise<void> {
-        this.setState('loading', true)
+    public async fetch(params: VotesRequest, silence?: boolean): Promise<void> {
+        if (!silence) {
+            this.setState('loading', true)
+        }
 
         try {
             this.setState('params', params)
@@ -43,22 +45,24 @@ export class VotesStore {
 
             if (response) {
                 this.setData('response', response)
-                this.setState('loading', false)
             }
         }
         catch (e) {
             error(e)
+        }
+
+        if (!silence) {
             this.setState('loading', false)
         }
     }
 
-    public async sync(): Promise<void> {
+    public async sync(silence?: boolean): Promise<void> {
         try {
             if (!this.state.params) {
                 throwException('Params must be defined in state')
             }
 
-            this.fetch(this.state.params)
+            this.fetch(this.state.params, silence)
         }
         catch (e) {
             error(e)

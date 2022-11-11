@@ -34,11 +34,14 @@ export function UserVoteInner(): JSX.Element {
         setFormVisible(false)
     }
 
+    window.proposal = proposal
+
     const castVote = async (reason?: string) => {
         if (!proposal.id) {
             return
         }
         try {
+            proposal.autoResync.stop()
             await voting.castVote(proposal.id, support, reason)
             await proposal.sync()
             hideForm()
@@ -46,6 +49,7 @@ export function UserVoteInner(): JSX.Element {
         catch (e) {
             error(e)
         }
+        proposal.autoResync.start()
     }
 
     const unlockTokens = async () => {
@@ -65,11 +69,13 @@ export function UserVoteInner(): JSX.Element {
             return
         }
         try {
+            proposal.autoResync.stop()
             await voting.unlockVoteTokens(proposal.id)
         }
         catch (e) {
             error(e)
         }
+        proposal.autoResync.start()
     }
 
     return (
