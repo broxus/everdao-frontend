@@ -34,8 +34,6 @@ export function UserVoteInner(): JSX.Element {
         setFormVisible(false)
     }
 
-    window.proposal = proposal
-
     const castVote = async (reason?: string) => {
         if (!proposal.id) {
             return
