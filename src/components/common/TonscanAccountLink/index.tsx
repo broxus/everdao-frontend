@@ -25,7 +25,7 @@ export function TonscanAccountLink({
     return (
         <span className={classNames('explorer-link', className)}>
             <a
-                href={`https://tonscan.io/accounts/${address}`}
+                href={`https://everscan.io/accounts/${address}`}
                 title={intl.formatMessage({ id: 'OPEN_IN_EXPLORER' })}
                 target="_blank"
                 rel="noopener noreferrer"
