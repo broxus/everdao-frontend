@@ -1,5 +1,5 @@
 export default {
-    OPEN_IN_EXPLORER: 'Open in TON Scan',
+    OPEN_IN_EXPLORER: 'Open in EVER Scan',
     OPEN_IN_ETHERSCAN: 'Open in Etherscan',
     BEFORE_UNLOAD_ALERT: 'Are you sure you want to leave?',
 
@@ -51,7 +51,7 @@ export default {
     FOOTER_NAV_BRIDGE_DISTRIBUTION_LINK_TEXT: 'BRIDGE distribution',
     FOOTER_NAV_HEADER_DEFI_PRODUCTS: 'DeFi Products',
     FOOTER_NAV_TON_SWAP_LINK_TEXT: 'FlatQube',
-    FOOTER_NAV_TON_SCAN_LINK_TEXT: 'TON Scan',
+    FOOTER_NAV_TON_SCAN_LINK_TEXT: 'EVER Scan',
     FOOTER_NAV_WTON_LINK_TEXT: 'Wrapped EVER',
     FOOTER_NAV_CRYSTAL_WALLET_LINK_TEXT: 'EVER Wallet',
     FOOTER_GITHUB_LINK_TEXT: 'Source code on GitHub',
